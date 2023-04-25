@@ -19,7 +19,7 @@ export default function LocaleSwitcher() {
       {otherLocales?.map((locale) => (
         <span key={"locale-" + locale}>
           <Link href={{ pathname, query }} as={asPath} locale={locale}>
-            {locale === "en" ? "English" : locale === "ar" ? "عربى" : null}
+            {locale === "en" ? "English" : locale === "ar" ? "عربي" : null}
           </Link>
         </span>
       ))}

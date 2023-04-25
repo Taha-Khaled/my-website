@@ -1,0 +1,14 @@
+//light colors
+html {
+  --lightBtn: #fe016c;
+  --lightBg: #fff;
+  --lightColor: #232323;
+  --textColor: black;
+}
+//dark colors
+html[data-theme="dark"] {
+  --lightBtn: #ffbd07;
+  --lightBg: #232323;
+  --lightColor: #fff;
+  --textColor: white;
+}
