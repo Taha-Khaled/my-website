@@ -3,43 +3,119 @@
   top: 0;
   height: 100px;
   width: 100vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 150px;
   background-color: var(--mainBg);
-  .logoHolder {
-    font-size: 35px;
-    font-weight: bolder;
+  .wrapper {
     display: flex;
+    padding: 20px 150px;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
-  }
-  .navigators {
-    display: flex;
-    gap: 50px;
-    font-size: 18px;
-    font-weight: normal;
-    .navigator {
-      hr {
-        transition: 0.4s;
-        opacity: 0;
-        width: 0;
-        margin-top: 4px;
+    position: relative;
+    @media only screen and (max-width: 1550px) {
+      padding: 20px 50px;
+    }
+    .logoHolder {
+      font-size: 35px;
+      font-weight: bolder;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    .navigators {
+      @media only screen and (max-width: 1200px) {
+        &[is-expanded="false"] {
+          z-index: -60;
+          transform: translateX(100vw);
+          opacity: 0;
+        }
+        z-index: 60;
+        opacity: 1;
+        transition: 1s;
+        position: absolute;
+        top: 100px;
+        right: 0;
+        background-color: var(--mainBg);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        height: calc(100vh - 100px);
+        width: 100%;
+        font-size: 32px;
       }
-      &:hover,
-      &[is-active="true"] {
+      display: flex;
+      gap: 0px 50px;
+      font-size: 18px;
+      font-weight: normal;
+      .navigator {
         hr {
-          opacity: 1;
-          width: 100%;
+          transition: 0.4s;
+          opacity: 0;
+          width: 0;
+          margin-top: 4px;
+        }
+        &:hover,
+        &[is-active="true"] {
+          hr {
+            opacity: 1;
+            width: 100%;
+          }
         }
       }
+      .navControl {
+        @media only screen and (min-width: 1201px) {
+          display: none;
+        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+      }
     }
-  }
-  .actions {
-    display: flex;
-    gap: 20px;
+
+    .actions,
+    .switchers {
+      @media only screen and (max-width: 1200px) {
+        display: none;
+      }
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .hamburgerMenu {
+      @media only screen and (min-width: 1201px) {
+        display: none;
+      }
+      cursor: pointer;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      z-index: 9999;
+      &[is-expanded="true"] {
+        div:first-child {
+          transform: rotate(45deg);
+          transform-origin: 0;
+        }
+        div:nth-child(2) {
+          transform: translateX(20px);
+          opacity: 0;
+        }
+        div:last-child {
+          transform: rotate(-45deg);
+          transform-origin: 1px;
+        }
+      }
+      div {
+        transform-origin: 0;
+        background-color: gray;
+        position: relative;
+        width: 22px;
+        height: 3px;
+        transition: all 0.4s linear;
+      }
+    }
   }
 }
 html[data-theme="dark"] {

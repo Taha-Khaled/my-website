@@ -14,7 +14,6 @@ function MyDocument(props: TMyDocument) {
       <title>Taha</title>
       <Head></Head>
       <body>
-        loading
         <Main />
         <NextScript />
       </body>

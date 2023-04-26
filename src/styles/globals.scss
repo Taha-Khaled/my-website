@@ -29,6 +29,11 @@ button {
   transition: 0.4s;
   &:hover {
     background-color: var(--btnHover);
-    color: var(--reverseTextColor);
+    color: var(--mainBg);
   }
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  justify-content: center;
 }

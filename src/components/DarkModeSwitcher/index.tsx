@@ -9,7 +9,7 @@ const ModeSwitcher = () => {
     setTheme(resolvedTheme == "light" ? "dark" : "light");
   };
   return (
-    <div>
+    <div className={styles.modeSwitcher}>
       <input
         type="checkbox"
         id="darkMode-toggle"

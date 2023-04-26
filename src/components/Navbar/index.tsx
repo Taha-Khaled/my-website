@@ -4,7 +4,7 @@ import Link from "next/link";
 import LanguageSwitcher from "../LanguageSwitcher";
 import ModeSwitcher from "../DarkModeSwitcher";
 import Image from "next/image";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { useRouter } from "next/router";
 interface TNavbar {
   navigators: string[];
@@ -12,25 +12,27 @@ interface TNavbar {
 const Navbar: FunctionComponent<TNavbar> = ({ navigators }) => {
   const { t } = useTranslation();
   const { asPath } = useRouter();
-
-  const RenderNavigators = () => (
-    <ul className={styles.navigators}>
-      {navigators?.map((item: string) => (
-        <li key={item}>
-          <Link
-            className={styles.navigator}
-            is-active={asPath?.includes(item)?.toString()}
-            href={`#${item}`}
-          >
-            <p>{t(item)}</p>
-            <hr />
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-  return (
-    <nav className={styles.navbar}>
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const RenderNavigators = () => {
+    return (
+      <>
+        {navigators?.map((item: string) => (
+          <li key={item}>
+            <Link
+              className={styles.navigator}
+              is-active={asPath?.includes(item)?.toString()}
+              href={`#${item}`}
+            >
+              <p>{t(item)}</p>
+              <hr />
+            </Link>
+          </li>
+        ))}
+      </>
+    );
+  };
+  const RenderLogoHolder = () => {
+    return (
       <Link href={`#home`} className={styles.logoHolder}>
         <Image
           className={styles.myLogo}
@@ -41,13 +43,43 @@ const Navbar: FunctionComponent<TNavbar> = ({ navigators }) => {
         />
         <p>Taha</p>
       </Link>
-      <RenderNavigators />
-      <div className={styles.actions}>
-        <LanguageSwitcher />
-        <ModeSwitcher />
-        <button className={styles.resume} title="resume">
-          Download Resume
-        </button>
+    );
+  };
+
+  return (
+    <nav className={styles.navbar}>
+      <div className={styles.wrapper}>
+        <RenderLogoHolder />
+        <div
+          className={styles.hamburgerMenu}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          is-expanded={isMenuOpen.toString()}
+        >
+          <div />
+          <div />
+          <div />
+        </div>
+        <ul className={styles.navigators} is-expanded={isMenuOpen.toString()}>
+          <RenderNavigators />
+          <li className={styles.navControl}>
+            <button className={styles.resume} title="resume">
+              Download Resume
+            </button>
+          </li>
+          <li className={styles.navControl}>
+            <LanguageSwitcher />
+            <ModeSwitcher />
+          </li>
+        </ul>
+        <div className={styles.actions}>
+          <div className={styles.switchers}>
+            <LanguageSwitcher />
+            <ModeSwitcher />
+          </div>
+          <button className={styles.resume} title="resume">
+            Download Resume
+          </button>
+        </div>
       </div>
     </nav>
   );
