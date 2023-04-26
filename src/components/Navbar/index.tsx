@@ -1,37 +1,52 @@
 import { useTranslation } from "next-i18next";
 import styles from "./navbar.module.scss";
 import Link from "next/link";
-import { useTheme } from "next-themes";
+import LanguageSwitcher from "../LanguageSwitcher";
+import ModeSwitcher from "../DarkModeSwitcher";
+import Image from "next/image";
+import { FunctionComponent } from "react";
 import { useRouter } from "next/router";
-import LocaleSwitcher from "../my-work/locale-switcher";
-
-const Navbar = () => {
+interface TNavbar {
+  navigators: string[];
+}
+const Navbar: FunctionComponent<TNavbar> = ({ navigators }) => {
   const { t } = useTranslation();
-  const { resolvedTheme, setTheme } = useTheme();
-  const handelToggle = () => {
-    setTheme(resolvedTheme == "light" ? "dark" : "light");
-  };
+  const { asPath } = useRouter();
 
+  const RenderNavigators = () => (
+    <ul className={styles.navigators}>
+      {navigators?.map((item: string) => (
+        <li key={item}>
+          <Link
+            className={styles.navigator}
+            is-active={asPath?.includes(item)?.toString()}
+            href={`#${item}`}
+          >
+            <p>{t(item)}</p>
+            <hr />
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
   return (
     <nav className={styles.navbar}>
-      <div className={styles.logoHolder}>
-        <Link href={"/"}>Taha</Link>
-      </div>
-      <div className={styles.navigators}>
-        <Link href={"#Home"}>Home</Link>
-        <Link href={"#About"}>About</Link>
-        <Link href={"#Service"}>Service</Link>
-        <Link href={"#Portfolio"}>Portfolio</Link>
-        <Link href={"#Blog"}>Blog</Link>
-        <Link href={"#Contact"}>Contact</Link>
-      </div>
-      <div className={styles.btnHolder}>
-        <button title="resume">Download Resume</button>
-        <button title="resume" onClick={handelToggle}>
-          change mode
-        </button>
-        <button title="resume">
-          <LocaleSwitcher />
+      <Link href={`#home`} className={styles.logoHolder}>
+        <Image
+          className={styles.myLogo}
+          src={"/assets/myLogo.svg"}
+          alt={"logo"}
+          width={47}
+          height={50}
+        />
+        <p>Taha</p>
+      </Link>
+      <RenderNavigators />
+      <div className={styles.actions}>
+        <LanguageSwitcher />
+        <ModeSwitcher />
+        <button className={styles.resume} title="resume">
+          Download Resume
         </button>
       </div>
     </nav>

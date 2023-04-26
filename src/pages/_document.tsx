@@ -11,8 +11,10 @@ interface TMyDocument {
 function MyDocument(props: TMyDocument) {
   return (
     <Html lang={props.locale}>
+      <title>Taha</title>
       <Head></Head>
       <body>
+        loading
         <Main />
         <NextScript />
       </body>
