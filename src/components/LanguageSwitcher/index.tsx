@@ -1,7 +1,8 @@
-import Link from "next/link";
+import styles from "./languageSwitcher.module.scss";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
-export default function LocaleSwitcher() {
+export default function LanguageSwitcher() {
   const {
     locales,
     locale: activeLocale,
@@ -15,7 +16,7 @@ export default function LocaleSwitcher() {
   );
 
   return (
-    <span>
+    <div className={styles.languageSwitcher}>
       {otherLocales?.map((locale) => (
         <span key={"locale-" + locale}>
           <Link href={{ pathname, query }} as={asPath} locale={locale}>
@@ -23,6 +24,6 @@ export default function LocaleSwitcher() {
           </Link>
         </span>
       ))}
-    </span>
+    </div>
   );
 }
