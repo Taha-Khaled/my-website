@@ -1,14 +1,30 @@
+:root {
+  --mainColor: black;
+  --secondaryColor: #6244c5;
+  --mainText: #12141d;
+  --secText: #5a5a5a;
+  --thrText: #c4c4c4;
+  --white: #fff;
+  --SocialBg: #f6f6f6;
+}
+
 //light colors
 html {
-  --lightBtn: #fe016c;
-  --lightBg: #fff;
-  --lightColor: #232323;
-  --textColor: black;
+  --mainBg: var(--white);
+  --mainTextColor: var(--mainText);
+  --secTextColor: var(--secText);
+  --secSocialBg: var(--mainText);
+  --btnHover: var(--mainColor);
+  //reverse
+  --reverseTextColor: var(--white);
 }
 //dark colors
 html[data-theme="dark"] {
-  --lightBtn: #ffbd07;
-  --lightBg: #232323;
-  --lightColor: #fff;
-  --textColor: white;
+  --mainBg: var(--mainColor);
+  --mainTextColor: var(--white);
+  --secTextColor: var(--thrText);
+  --secSocialBg: var(--secondaryColor);
+  --btnHover: var(--white);
+  //reverse
+  --reverseTextColor: var(--mainText);
 }
