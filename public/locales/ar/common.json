@@ -1,14 +1,8 @@
 {
-  "home": {
-    "Home title": "عنوان المنزل",
-    "Home description": "وصف المنزل"
-  },
-  "about": {
-    "About title": "حول العنوان",
-    "About description": "حول الوصف"
-  },
-  "header": {
-    "Home": "مسكن",
-    "About": "حول"
-  }
+  "home": "الرئيسية",
+  "about": "معلومات",
+  "service": "خدماتي",
+  "portfolio": "أعمالي",
+  "blog": "مدونتي",
+  "contact": "تواصل معي"
 }
